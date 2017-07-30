@@ -1,9 +1,11 @@
 var express = require('express');
 var agent = require('useragent');
 var app = express();
+app.enable('trust proxy');
 
 app.get('/', function(req, res) {
-  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  
+  var ip = req.ip;
   var language = req.acceptsLanguages();
   var software = agent.parse(req.headers['user-agent']);
   res.status(200);
