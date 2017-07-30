@@ -3,7 +3,7 @@ var agent = require('useragent');
 var app = express();
 
 app.get('/', function(req, res) {
-  var ip = req.ip;
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   var language = req.acceptsLanguages();
   var software = agent.parse(req.headers['user-agent']);
   res.status(200);
